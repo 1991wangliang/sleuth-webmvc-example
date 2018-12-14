@@ -25,8 +25,8 @@ public class Frontend {
 
 
   @RequestMapping("/") public String callBackend() {
-    String str =  api.printDate();
     ExtraFieldPropagation.set("groupId","test");
+    String str =  api.printDate();
     logger.info("str->{}",str);
     return str;
   }
