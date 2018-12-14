@@ -5,13 +5,13 @@ import brave.propagation.B3Propagation;
 import brave.propagation.ExtraFieldPropagation;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+
+import java.util.Date;
 
 @EnableAutoConfiguration
 @EnableDubbo // redundant https://github.com/apache/incubator-dubbo-spring-boot-project/issues/322
@@ -19,6 +19,8 @@ import org.springframework.context.annotation.Bean;
 public class Backend implements Api {
 
   private Logger logger = LoggerFactory.getLogger(Backend.class);
+
+
 
   @Override
   public String printDate() {
@@ -28,6 +30,8 @@ public class Backend implements Api {
     return str;
   }
 
+
+  //when remove this code,that will get groupId value.
   @Bean
   public Tracing tracing(){
     return Tracing.newBuilder()
@@ -43,8 +47,7 @@ public class Backend implements Api {
             // These args allow dubbo to start without any web framework
             "--spring.main.web-environment=false",
             "--dubbo.registry.address=N/A",
-            "--dubbo.protocol.port=9000",
-            "--spring.sleuth.propagation-keys=groupId"
+            "--dubbo.protocol.port=9000"
     );
   }
 }
